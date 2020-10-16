@@ -1,0 +1,88 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Ventas</h5>
+    
+    <div class="row">
+      <div class="col-12 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="showModal()">
+          Agregar Venta
+        </button>  
+      </div>
+    </div>
+    <div class="row pt-4">
+      <div class="col-12">
+        <table class="table teble-hover table-striped table-sm">
+          <thead>
+            <tr>
+              <th>Opc</th>
+              <th>Periodo</th>
+              <th>Cantidad</th>
+              <th>Valor</th>
+              <th>Cliente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sale of sales">
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-primary btn-sm" (click)="editSale(sale.idSale)"><i class='fas fa-pencil-alt'></i></button>
+                  <button class="btn btn-danger btn-sm" (click)="deleteSale(sale.idSale)"><i class='fas fa-minus-circle'></i></button>
+                </div>
+              </td>
+              <td>{{sale.period}}</td>
+              <td>{{sale.quantity}}</td>
+              <td>{{sale.value}}</td>
+              <td>{{sale.customer.firstName}} {{sale.customer.lastName}} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="formSale" (ngSubmit)="onSubmit()" id="formSale">
+        <div class="modal-header">
+          <h4 class="modal-title">Administrar Ventas</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="row">
+                <div class="form-group col-12">
+                  <label>Periodo</label>
+                  <input type="text" class="form-control" formControlName="period" mask="000000">
+                </div>
+                <div class="form-group col-12">
+                  <label>Cantidad</label>
+                  <input type="number" class="form-control" formControlName="quantity">
+                </div>
+                <div class="form-group col-12">
+                  <label>Valor</label>
+                  <input type="number" class="form-control" formControlName="value">
+                </div>
+                <div class="form-group col-12">
+                  <label>Cliente</label>
+                  <select class="form-control" formControlName="idCustomer">
+                    <option value="">:.Seleccionar.:</option>
+                    <option *ngFor="let customer of customers" value="{{customer.idCustomer}}">{{customer.firstName}} {{customer.lastName}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" >Guardar</button>
+          <button type="button" class="btn btn-secondary" id="close-modal" data-dismiss="modal">Cerrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

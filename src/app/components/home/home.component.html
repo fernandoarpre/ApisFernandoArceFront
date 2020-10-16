@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-xl-4 col-sm-6 col-12">
+    <div class="card shadow">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="media d-flex">
+            <div class="media-body text-left">
+              <h3 class="text-primary">{{dashboard.totalUsers}}</h3>
+              <span>Cantidad de Usuarios</span>
+            </div>
+            <div class="align-self-center">
+              <i class="far fa-address-card text-primary font-large float-right"></i>
+            </div>
+          </div>
+          <div class="progress mt-1 mb-0" style="height: 7px;">
+            <div class="progress-bar bg-primary" role="progressbar" style="width: 100%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 col-sm-6 col-12">
+    <div class="card shadow">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="media d-flex">
+            <div class="media-body text-left">
+              <h3 class="text-info">{{dashboard.totalCustomers}}</h3>
+              <span>Cantidad Clientes</span>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-user-tag text-info font-large float-right"></i>
+            </div>
+          </div>
+          <div class="progress mt-1 mb-0" style="height: 7px;">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 100%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 col-sm-6 col-12">
+    <div class="card shadow">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="media d-flex">
+            <div class="media-body text-left">
+              <h3 class="text-warning">{{dashboard.totalSales}}</h3>
+              <span>Cantidad Ventas</span>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-shopping-cart text-warning font-large float-right"></i>
+            </div>
+          </div>
+          <div class="progress mt-1 mb-0" style="height: 7px;">
+            <div class="progress-bar bg-warning" role="progressbar" style="width: 100%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row pt-4">
+  <div class="col-md-10 offset-md-1">
+    <div class="card shadow">
+      <div class="card-body">
+        <h5 class="card-title">Ventas x Clientes</h5>
+        <div class="row">
+          <div class="col-md-6 offset-md-6">
+            <div class="form-group">
+              <label for="cliente">Seleccionar Cliente</label>
+              <select id="cliente"  class="form-control" #cliente (change)="changeCustomer(cliente.value)">
+                 <option value="">:.Seleccionar.:</option>
+                 <option *ngFor="let customer of customers" value="{{customer.idCustomer}}">{{customer.firstName}} {{customer.lastName}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions" style="width: 100%; height: 400px; display: block;" [(update)]="updateFlag" [oneToOne]="true"></highcharts-chart>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Clientes</h5>
+    
+    <div class="row">
+      <div class="col-12 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="showModal()">
+          Agregar Cliente
+        </button>  
+      </div>
+    </div>
+    <div class="row pt-4">
+      <div class="col-12">
+        <table class="table teble-hover table-striped table-sm">
+          <thead>
+            <tr>
+              <th>Opc</th>
+              <th>Documento</th>
+              <th>Nombre</th>
+              <th>Dirección</th>
+              <th>Ciudad</th>
+              <th>Celular</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let customer of customers">
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-primary btn-sm" (click)="editCustomer(customer.idCustomer)"><i class='fas fa-pencil-alt'></i></button>
+                  <button class="btn btn-danger btn-sm" (click)="deleteCustomer(customer.idCustomer)"><i class='fas fa-minus-circle'></i></button>
+                </div>
+              </td>
+              <td>{{customer.documentId}}</td>
+              <td>{{customer.firstName}} {{customer.lastName}}</td>
+              <td>{{customer.address}}</td>
+              <td>{{customer.city}}</td>
+              <td>{{customer.cellphone}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="formCustomer" (ngSubmit)="onSubmit()" id="formCustomer">
+        <div class="modal-header">
+          <h4 class="modal-title">Administrar Clientes</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="row">
+                <div class="form-group col-12">
+                  <label>Documento</label>
+                  <input type="text" class="form-control" formControlName="documentId">
+                </div>
+                <div class="form-group col-12">
+                  <label>Nombre</label>
+                  <input type="text" class="form-control" formControlName="firstName">
+                </div>
+                <div class="form-group col-12">
+                  <label>Apellido</label>
+                  <input type="text" class="form-control" formControlName="lastName">
+                </div>
+                <div class="form-group col-12">
+                  <label>Dirección</label>
+                  <input type="text" class="form-control" formControlName="address">
+                </div>
+                <div class="form-group col-12">
+                  <label>Ciudad</label>
+                  <select class="form-control" formControlName="city">
+                    <option value="">:.Seleccionar.:</option>
+                    <option *ngFor="let city of cities" value="{{city.municipio}}">{{city.municipio}}</option>
+                  </select>
+                </div>
+                <div class="form-group col-12">
+                  <label>Celular</label>
+                  <input type="text" class="form-control" formControlName="cellphone">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" >Guardar</button>
+          <button type="button" class="btn btn-secondary" id="close-modal" data-dismiss="modal">Cerrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
